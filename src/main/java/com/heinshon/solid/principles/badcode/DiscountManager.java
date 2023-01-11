@@ -1,7 +1,12 @@
 package com.heinshon.solid.principles.badcode;
 
 import lombok.SneakyThrows;
-import org.jboss.resteasy.reactive.common.NotImplementedYet;
+
+
+import static com.heinshon.solid.principles.badcode.Constants.DISCOUNT_FOR_MOST_VALUABLE_CUSTOMERS;
+import static com.heinshon.solid.principles.badcode.Constants.DISCOUNT_FOR_SIMPLE_CUSTOMERS;
+import static com.heinshon.solid.principles.badcode.Constants.DISCOUNT_FOR_VALUABLE_CUSTOMERS;
+import static com.heinshon.solid.principles.badcode.Constants.MAXIMUM_DISCOUNT_FOR_LOYALTY;
 
 public class DiscountManager {
 
@@ -9,7 +14,10 @@ public class DiscountManager {
     public double applyDiscount(double price, AccountStatus accountStatus, int timeOfHavingAccountInYears){
         double priceAfterDiscount = 0;
 
-        double discountForLoyaltyInPercentage  = (timeOfHavingAccountInYears > 5) ? (double) 5/100 : (double) timeOfHavingAccountInYears/100;
+        double discountForLoyaltyInPercentage  =
+                (timeOfHavingAccountInYears > MAXIMUM_DISCOUNT_FOR_LOYALTY) ?
+                        (double) MAXIMUM_DISCOUNT_FOR_LOYALTY/100 :
+                        (double) timeOfHavingAccountInYears/100;
 
 
         switch (accountStatus){
@@ -17,17 +25,17 @@ public class DiscountManager {
                 priceAfterDiscount = price;
                 break;
             case SimpleCustomer:
-                priceAfterDiscount = (price - (0.1 * price));
+                priceAfterDiscount = (price - (DISCOUNT_FOR_SIMPLE_CUSTOMERS * price));
                 priceAfterDiscount = priceAfterDiscount -
                         (discountForLoyaltyInPercentage * priceAfterDiscount);
                 break;
             case ValuableCustomer:
-                priceAfterDiscount = (0.7 * price);
+                priceAfterDiscount = (DISCOUNT_FOR_VALUABLE_CUSTOMERS * price);
                 priceAfterDiscount = priceAfterDiscount -
                         (discountForLoyaltyInPercentage * priceAfterDiscount);
                 break;
             case MostValuableCustomer:
-                priceAfterDiscount = (price - (0.5 * price));
+                priceAfterDiscount = (price - (DISCOUNT_FOR_MOST_VALUABLE_CUSTOMERS * price));
                 priceAfterDiscount = priceAfterDiscount -
                         (discountForLoyaltyInPercentage * priceAfterDiscount);
                 break;
