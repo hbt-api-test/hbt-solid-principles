@@ -17,29 +17,5 @@ public class BankService {
     }
 
 
-    public void printPassbook(){
-        //actualizar transacciones
-    }
-
-
-    public void getLoanInterestInfo(String loanType){
-        if(loanType.equals("hogar")){
-            //calcular intereses credito hogar
-        }
-        if(loanType.equals("libreInversion")){
-            //calcular intereses de libre inversion
-        }
-        if(loanType.equals("carro")){
-            //calcular intereses vehicular
-        }
-    }
-
-    public void sendOTP(String medium){
-        if(medium.equals("email")){
-            //codigo para envio de email
-            //JavaMailSenderAPI
-        }
-    }
-
 
 }
