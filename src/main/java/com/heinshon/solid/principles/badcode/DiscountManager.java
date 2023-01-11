@@ -20,19 +20,18 @@ public class DiscountManager {
                 break;
             case SimpleCustomer:
                 priceAfterDiscount = PriceExtensions.applyDiscountForAccountStatus(price, DISCOUNT_FOR_SIMPLE_CUSTOMERS);
-                priceAfterDiscount = PriceExtensions.applyDiscountForTimeOfHavingAccount(priceAfterDiscount, timeOfHavingAccountInYears);
                 break;
             case ValuableCustomer:
                 priceAfterDiscount = PriceExtensions.applyDiscountForAccountStatus(price, DISCOUNT_FOR_VALUABLE_CUSTOMERS);
-                priceAfterDiscount = PriceExtensions.applyDiscountForTimeOfHavingAccount(priceAfterDiscount, timeOfHavingAccountInYears);
                 break;
             case MostValuableCustomer:
                 priceAfterDiscount = PriceExtensions.applyDiscountForAccountStatus(price, DISCOUNT_FOR_MOST_VALUABLE_CUSTOMERS);
-                priceAfterDiscount = PriceExtensions.applyDiscountForTimeOfHavingAccount(priceAfterDiscount, timeOfHavingAccountInYears);
                 break;
             default:
                 throw new NoSuchMethodException("Metodo no implementado");
         }
+
+        priceAfterDiscount = PriceExtensions.applyDiscountForTimeOfHavingAccount(priceAfterDiscount, timeOfHavingAccountInYears);
 
 
         return priceAfterDiscount;
