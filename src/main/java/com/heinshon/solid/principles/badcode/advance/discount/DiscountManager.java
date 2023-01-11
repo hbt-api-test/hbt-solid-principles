@@ -24,7 +24,7 @@ public class DiscountManager {
 
         priceAfterDiscount = discountCalculatorFactory.GetAccountDiscountCalculator(accountStatus)
                 .applyDicount(price);
-        
+
         priceAfterDiscount = loyaltyDicountCalculator.applyDiscount(priceAfterDiscount,
                 timeOfHavingAccountInYears);
 
