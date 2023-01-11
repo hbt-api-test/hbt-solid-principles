@@ -14,30 +14,21 @@ public class DiscountManager {
     public double applyDiscount(double price, AccountStatus accountStatus, int timeOfHavingAccountInYears){
         double priceAfterDiscount = 0;
 
-        double discountForLoyaltyInPercentage  =
-                (timeOfHavingAccountInYears > MAXIMUM_DISCOUNT_FOR_LOYALTY) ?
-                        (double) MAXIMUM_DISCOUNT_FOR_LOYALTY/100 :
-                        (double) timeOfHavingAccountInYears/100;
-
-
         switch (accountStatus){
             case NotRegistered:
                 priceAfterDiscount = price;
                 break;
             case SimpleCustomer:
-                priceAfterDiscount = (price - (DISCOUNT_FOR_SIMPLE_CUSTOMERS * price));
-                priceAfterDiscount = priceAfterDiscount -
-                        (discountForLoyaltyInPercentage * priceAfterDiscount);
+                priceAfterDiscount = PriceExtensions.applyDiscountForAccountStatus(price, DISCOUNT_FOR_SIMPLE_CUSTOMERS);
+                priceAfterDiscount = PriceExtensions.applyDiscountForTimeOfHavingAccount(priceAfterDiscount, timeOfHavingAccountInYears);
                 break;
             case ValuableCustomer:
-                priceAfterDiscount = (DISCOUNT_FOR_VALUABLE_CUSTOMERS * price);
-                priceAfterDiscount = priceAfterDiscount -
-                        (discountForLoyaltyInPercentage * priceAfterDiscount);
+                priceAfterDiscount = PriceExtensions.applyDiscountForAccountStatus(price, DISCOUNT_FOR_VALUABLE_CUSTOMERS);
+                priceAfterDiscount = PriceExtensions.applyDiscountForTimeOfHavingAccount(priceAfterDiscount, timeOfHavingAccountInYears);
                 break;
             case MostValuableCustomer:
-                priceAfterDiscount = (price - (DISCOUNT_FOR_MOST_VALUABLE_CUSTOMERS * price));
-                priceAfterDiscount = priceAfterDiscount -
-                        (discountForLoyaltyInPercentage * priceAfterDiscount);
+                priceAfterDiscount = PriceExtensions.applyDiscountForAccountStatus(price, DISCOUNT_FOR_MOST_VALUABLE_CUSTOMERS);
+                priceAfterDiscount = PriceExtensions.applyDiscountForTimeOfHavingAccount(priceAfterDiscount, timeOfHavingAccountInYears);
                 break;
             default:
                 throw new NoSuchMethodException("Metodo no implementado");
