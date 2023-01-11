@@ -1,7 +1,11 @@
 package com.heinshon.solid.principles.badcode;
 
+import lombok.SneakyThrows;
+import org.jboss.resteasy.reactive.common.NotImplementedYet;
+
 public class DiscountManager {
 
+    @SneakyThrows
     public double applyDiscount(double price, AccountStatus accountStatus, int timeOfHavingAccountInYears){
         double priceAfterDiscount = 0;
 
@@ -28,7 +32,7 @@ public class DiscountManager {
                         (discountForLoyaltyInPercentage * priceAfterDiscount);
                 break;
             default:
-                break;
+                throw new NoSuchMethodException("Metodo no implementado");
         }
 
 
