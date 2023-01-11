@@ -7,6 +7,10 @@ public class NotificationService {
             //codigo para envio de email
             //JavaMailSenderAPI
         }
+        if(medium.equals("mobile")){
+            //codigo para enviar mensajes
+            //Implementar Twilio API
+        }
     }
 
 }
